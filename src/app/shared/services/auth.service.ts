@@ -6,19 +6,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+// Marks the class as available for dependency injection, with root level scope.
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any; // Save logged in user data
+  // Stores the current user's data.
+  userData: any;
 
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,
-    public snackBar: MatSnackBar, // Inject MatSnackBar
-  public ngZone: NgZone // NgZone service to remove outside scope warning
+    public afs: AngularFirestore, // Injects the Firestore service for database operations.
+    public afAuth: AngularFireAuth, // Injects the Firebase Authentication service.
+    public router: Router, // Provides navigation and URL manipulation capabilities.
+    public snackBar: MatSnackBar, // Material Design snack bar for displaying brief messages.
+    public ngZone: NgZone // Service for executing work inside or outside of the Angular zone.
   ) {
+    // Listens for changes to the authState to automatically set or clear userData.
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
@@ -29,62 +32,65 @@ export class AuthService {
     });
   }
 
+  // Handles user sign-in with email and password.
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then(result => {
         this.SetUserData(result.user);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard']); // Redirects the user to the dashboard after successful sign-in.
       })
       .catch(error => {
-        window.alert(error.message);
+        window.alert(error.message); // Displays an alert if there's a sign-in error.
       });
   }
 
+  // Handles new user registration with email and password.
   SignUp(email: string, password: string): Promise<void> {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
         this.SetUserData(result.user);
-        // Display success message with MatSnackBar
+        // Shows a snack bar with a success message.
         this.snackBar.open('Registration successful! Redirecting to login page...', 'Close', {
-          duration: 3000, // Adjust duration as needed
+          duration: 3000,
         });
 
         setTimeout(() => {
-          this.router.navigate(['/sign-in']); // Navigate after the snackbar has been displayed
+          this.router.navigate(['/sign-in']); // Redirects to the sign-in page after a delay.
         }, 3000);
 
-        return null; // No error
+        return null;
       })
       .catch((error) => {
-        window.alert(error.message); // Consider using MatSnackBar here as well for consistency
+        window.alert(error.message); // Displays an alert if there's a registration error.
       });
   }
 
-
+  // Checks if the user is currently logged in by examining local storage.
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null; // Check if the user object exists
+    return user !== null;
   }
 
+  // Updates or sets user data in Firestore on login or registration.
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
     };
     return userRef.set(userData, {
-      merge: true,
+      merge: true, // Merges the document if it already exists.
     });
   }
 
+  // Handles user sign-out and clears local storage.
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['sign-in']); // Redirects to the sign-in page after sign-out.
     });
   }
 }
