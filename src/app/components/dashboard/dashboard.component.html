@@ -1,26 +1,17 @@
 <!-- Top navigation -->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="navbar-brand">
-      <!-- Your logo or brand image goes here -->
-    </span>
+    <span>Welcome, {{ authService.userData.displayName || 'User' }}!</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<!-- Sidebar navigation -->
+<!-- Main content -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" fixedInViewport="true" role="navigation" mode="side" opened="true">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <!-- Links to different sections or pages of the dashboard -->
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
-      <a mat-list-item routerLink="/settings" routerLinkActive="active">Settings</a>
-    </mat-nav-list>
-  </mat-sidenav>
   <mat-sidenav-content>
-    <!-- Main content -->
     <main role="main" class="content">
+      <p>Welcome to your dashboard!</p>
       <!-- Content area where dynamic components or data will be displayed -->
       <router-outlet></router-outlet>
     </main>
