@@ -1,5 +1,11 @@
 # Angular Firebase Authentication Demo
 
+![Sign-In page](https://i2.paste.pics/0474fc7500447d134ee7f13a50f0c48d.png)
+![Sign-Up page](https://i2.paste.pics/c82d7e00c34db8f28770e5eb75ce2c74.png)
+![Sign-In page](https://i2.paste.pics/e524bf34dd27a44ca113651eeb889411.png)
+
+
+
 This project demonstrates the integration of Angular with Firebase Authentication, providing a template for sign-up, sign-in, and logout functionalities. It's designed as a starting point for web applications requiring user authentication.
 
 ## Features
