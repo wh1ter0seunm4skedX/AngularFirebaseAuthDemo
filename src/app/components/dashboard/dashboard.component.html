@@ -1,9 +1,8 @@
 <!-- Top navigation -->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Welcome, {{ authService.userData.displayName || 'User' }}!</span>
     <span class="spacer"></span>
-    <button mat-button (click)="logout()">Logout</button>
+    <button mat-button (click)="logout()" class="animated-logout-button">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -11,8 +10,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
     <main role="main" class="content">
-      <p>Welcome to your dashboard!</p>
-      <!-- Content area where dynamic components or data will be displayed -->
+      <span class="greeting">Welcome, {{ authService.userData.displayName || 'User' }}!</span>
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
