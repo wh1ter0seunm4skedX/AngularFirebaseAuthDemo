@@ -1,0 +1,132 @@
+.displayTable {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+
+.displayTableCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.authBlock {
+  background: #ffffff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  width: 90%;
+  max-width: 500px;
+  animation: authBlockEntrance 1.5s ease-out forwards;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes authBlockEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+mat-card-title {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 300;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  input {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+}
+
+button.mat-raised-button {
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  background-color: #5e35b1;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px 0 rgba(94,53,177,.4);
+  transition: all 0.3s ease;
+  animation: buttonGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes buttonGlow {
+  from {
+    box-shadow: 0 4px 14px 0 rgba(94,53,177,.4);
+  }
+  to {
+    box-shadow: 0 6px 20px 0 rgba(94,53,177,.6);
+  }
+}
+
+button.mat-raised-button:hover {
+  background-color: #512da8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(94,53,177,.5);
+}
+
+.redirectToLogin {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+
+  a {
+    color: #5e35b1;
+    font-weight: 500;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.orContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  position: relative;
+
+  .or {
+    background: #ffffff;
+    padding: 0 1rem;
+    z-index: 1;
+    color: #666;
+    font-weight: bold;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 50%;
+    top: 50%;
+    background: #cccccc;
+  }
+
+  &:before {
+    left: 5%;
+  }
+
+  &:after {
+    right: 5%;
+  }
+}

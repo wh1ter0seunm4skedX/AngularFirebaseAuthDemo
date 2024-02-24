@@ -1,0 +1,36 @@
+<div class="displayTable">
+  <div class="displayTableCell">
+    <mat-card class="authBlock">
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Enter your username" #userName required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter your password" #userPassword type="password" required>
+        </mat-form-field>
+
+        <!-- Calling SignIn Api from AuthService -->
+        <div class="buttons-container">
+          <button mat-raised-button class="login-btn" (click)="authService.SignIn(userName.value, userPassword.value)">
+            Log in
+          </button>
+          <div class="orContainer">
+            <span class="or">Or</span>
+          </div>
+          <button mat-raised-button color="primary" routerLink="/register-user" class="register-btn">
+            Register
+          </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <div class="redirectToLogin">
+
+    </div>
+  </div>
+</div>
