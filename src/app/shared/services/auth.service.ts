@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public snackBar: MatSnackBar, // Inject MatSnackBar
+  public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -39,16 +41,27 @@ export class AuthService {
       });
   }
 
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string): Promise<void> {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
         this.SetUserData(result.user);
+        // Display success message with MatSnackBar
+        this.snackBar.open('Registration successful! Redirecting to login page...', 'Close', {
+          duration: 3000, // Adjust duration as needed
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/sign-in']); // Navigate after the snackbar has been displayed
+        }, 3000);
+
+        return null; // No error
       })
-      .catch(error => {
-        window.alert(error.message);
+      .catch((error) => {
+        window.alert(error.message); // Consider using MatSnackBar here as well for consistency
       });
   }
+
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);

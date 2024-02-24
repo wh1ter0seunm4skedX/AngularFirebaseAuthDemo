@@ -15,10 +15,11 @@
           </mat-form-field>
 
           <div class="formGroup">
-            <button mat-raised-button color="primary" (click)="authService.SignUp(userEmail.value, userPwd.value)">
-              Sign Up
+            <button mat-raised-button color="primary" type="button" (click)="authService.SignUp(userEmail.value, userPwd.value)">
+              Sign up
             </button>
           </div>
+
         </form>
       </mat-card-content>
       <mat-card-actions class="redirectToLogin">

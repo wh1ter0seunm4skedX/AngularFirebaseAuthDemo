@@ -90,7 +90,10 @@ button.mat-raised-button:hover {
     }
   }
 }
-
+.success-message {
+  color: green;
+  // Additional styling as needed
+}
 .orContainer {
   display: flex;
   justify-content: center;

@@ -21,6 +21,7 @@ import { AuthService } from './shared/services/auth.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatSnackBarModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
