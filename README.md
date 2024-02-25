@@ -39,12 +39,13 @@ This project demonstrates the integration of Angular with Firebase Authenticatio
    ```bash
    npm install
    ```
-
+   
 3. **Configure Firebase:**
 
    - Create a Firebase project in the Firebase Console.
    - Add a web app to your Firebase project and copy the Firebase config object.
    - Place your Firebase config in `src/environments/environment.ts`.
+   - If you having trouble - look into "Firebase Configuration in more detail" section
 
 4. **Run the development server:**
 
@@ -53,6 +54,53 @@ This project demonstrates the integration of Angular with Firebase Authenticatio
    ```
 
    Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Firebase Configuration in more detail 
+
+The current Firebase configuration details are placeholders tied to a demo project. You should replace them with your own Firebase project details to connect the application to your Firebase database and authentication services.
+
+A) **Locate the Firebase configuration in your project:**
+
+   Navigate to `src/environments/environment.ts`. You'll find the Firebase configuration object that looks like this:
+
+   ```typescript
+   export const environment = {
+     production: false,
+     firebase: {
+       apiKey: "AIzaSyCxGu31FemX5g0QcyT5VDQ3QnFpBreoKQI",
+       authDomain: "angularfirebaseauthdemo.firebaseapp.com",
+       projectId: "angularfirebaseauthdemo",
+       storageBucket: "angularfirebaseauthdemo.appspot.com",
+       messagingSenderId: "166023179427",
+       appId: "1:166023179427:web:f3cc1a599ada1bf0a7e316"
+     }
+   };
+```
+
+Replace the above details with those of your Firebase project, which you can find in your Firebase Console under your project settings.
+
+Example:
+
+```typescript
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "<YOUR_API_KEY>",
+    authDomain: "<YOUR_AUTH_DOMAIN>",
+    projectId: "<YOUR_PROJECT_ID>",
+    storageBucket: "<YOUR_STORAGE_BUCKET>",
+    messagingSenderId: "<YOUR_MESSAGING_SENDER_ID>",
+    appId: "<YOUR_APP_ID>"
+  }
+};
+```
+
+Ensure you replace <YOUR_API_KEY>, <YOUR_AUTH_DOMAIN>, and other placeholders with the actual configuration values from your Firebase project.
+
+B) Save the changes:
+
+After updating the configuration, save the file. Your Angular application is now connected to your Firebase project.
+
 
 ## Usage
 
